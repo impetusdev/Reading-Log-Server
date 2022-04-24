@@ -1,7 +1,6 @@
 const mongoose = require("mongoose");
 
-//TODO: put in the correct password
-var uri = "mongodb+srv://LarryDev:<password>@cluster0.esyq9.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
+var uri = `mongodb+srv://LarryDev:${process.env.MONGO_ATLAS_LARRYDEV_PASSWORD}@cluster0.esyq9.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`
 
 const options = {
     useNewUrlParser: true,
