@@ -1,10 +1,15 @@
 'use strict'
 
-const express = require('express');
+const express = require("express");
 const bodyParser = require("body-parser");
 
+const routes = require('./api/routes/textRoutes'); //importing route
+require("./config/db");
+
+// Import API route
 
 const app = express();
+routes(app);
 const port = process.env.PORT || 3000;
 
 // use bodyParse middleware 
