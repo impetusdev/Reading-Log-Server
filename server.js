@@ -2,23 +2,24 @@
 
 const express = require("express");
 const bodyParser = require("body-parser");
+const cors = require("cors");
 
-const routes = require('./api/routes/textRoutes'); //importing route
+const routes = require('./api/routes/textRoutes');
 require("./config/db");
 
 // Import API route
 
-const app = express();
 const port = process.env.PORT || 3000;
+const app = express();
+
+app.use(cors({ origin: 'http://localhost:3001' }));
+app.options('*', cors());
 
 // use bodyParse middleware 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 routes(app);
-app.get('/', function(req, res) {
-    res.send('Hello World!')
-});
 
 app.listen(port, function() {
     console.log(`Server running on port:${port}!`)
