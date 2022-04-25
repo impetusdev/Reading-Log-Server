@@ -9,13 +9,13 @@ require("./config/db");
 // Import API route
 
 const app = express();
-routes(app);
 const port = process.env.PORT || 3000;
 
 // use bodyParse middleware 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
+routes(app);
 app.get('/', function(req, res) {
     res.send('Hello World!')
 });

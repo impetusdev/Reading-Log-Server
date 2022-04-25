@@ -1,6 +1,6 @@
 const Text = require("../models/textModel");
 
-exports.listAllText = (req, res) => {
+exports.listAllText = (_, res) => {
     Text.find({}, (err, text) => {
         if (err) {
             res.status(500).send(err);
