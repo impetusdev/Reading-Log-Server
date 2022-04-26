@@ -1,7 +1,9 @@
+const rank = require("../api/helpers/ranking");
 const expect = require("chai").expect;
 
-describe("Mocha & Chai test", function() {
-    it("should return true", function() {
-        expect('text').to.equal("text")
-    })
-})
+describe("Word Ranking System", function() {
+    it('should return an integer rank for the input "the"', function() {
+        const wordRank = rank("the", 1);
+        expect(wordRank).to.equal(1);
+    });
+});
