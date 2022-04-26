@@ -12,11 +12,11 @@ const TextSchema = new Schema({
         required: true
     },
     wordCount: {
-        type: integer,
+        type: Number,
 
     },
     complexity: {
-        type: integer,
+        type: Number,
     },
     createdOn: {
         type: Date,

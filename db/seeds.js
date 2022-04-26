@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
 
 const Text = require('../api/models/textModel');
-const Rank = require('../api/models/rankModel');
-const rank = require('../api/helpers/ranking')
+const rank = require('../api/helpers/ranking');
+const getWords = require('./fileReader');
 
 let uri = `mongodb+srv://LarryDev:${process.env.MONGO_ATLAS_LARRYDEV_PASSWORD}@cluster0.esyq9.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`
 
@@ -28,13 +28,19 @@ const seedText = [{
     }
 ];
 
-// perform the calculation of seeing how complex the values are. 
 
+////////////////////////
+//CSV parsing for data//
+////////////////////////
+
+// perform the calculation of seeing how complex the values are. 
+// TODO: access the csv file measuring word frequency
+const words = getWords();
 
 const seedDB = async() => {
     await Text.deleteMany({});
-    //TODO: make a helper function that performs the calculation of text complexity
     await Text.insertMany(seedText);
+    //TODO: make a helper function that performs the calculation of text complexity
 
     console.log(`You have seeded ${seedText.length} text snippets`);
 }

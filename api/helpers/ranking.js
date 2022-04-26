@@ -4,4 +4,4 @@ const rank = (word, index) => {
 }
 
 
-export default rank;
+exports.default = rank;
