@@ -11,11 +11,17 @@ const TextSchema = new Schema({
         type: String,
         required: true
     },
+    wordCount: {
+        type: integer,
+
+    },
+    complexity: {
+        type: integer,
+    },
     createdOn: {
         type: Date,
         default: Date.now
     }
 });
-
 
 module.exports = mongoose.model("textModel", TextSchema);
