@@ -11,12 +11,11 @@ const WordSchema = new Schema({
         required: true
     },
     frequency: {
-        type: integer,
+        type: Number,
     },
     rank: {
-        type: integer,
+        type: Number,
     }
 });
-
 
 module.exports = mongoose.model("wordModel", WordSchema);
