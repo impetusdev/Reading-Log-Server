@@ -1,4 +1,4 @@
-const Text = require("../models/textModel");
+const Text = require("../models/text");
 
 exports.listAllText = (_, res) => {
     Text.find({}, (err, text) => {
@@ -10,6 +10,7 @@ exports.listAllText = (_, res) => {
 };
 
 exports.createNewText = (req, res) => {
+    // TODO: get the data and then get the word rank. 
     let newText = new Text(req.body);
     newText.save((err, text) => {
         if (err) {

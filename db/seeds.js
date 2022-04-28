@@ -38,11 +38,6 @@ const seedText = [{
 // TODO: access the csv file measuring word frequency
 
 const seedDB = async() => {
-    try {
-
-    } catch (error) {
-
-    }
     const words = await getWords();
 
     await Text.deleteMany({});

@@ -19,19 +19,11 @@ mongoose.connect(uri, options).then(() => {
         }
     });
 
-
-////////////////////////
-//CSV parsing for data//
-////////////////////////
-
-// perform the calculation of seeing how complex the values are. 
-// TODO: access the csv file measuring word frequency
-
 const seedDB = async() => {
     const words = await getWords();
 
     await Word.deleteMany({});
-    await Word.insertMany({ word: 'hello' });
+    await Word.insertMany(words);
     console.log(`You have seeded ${words.length} text snippets`);
 }
 
