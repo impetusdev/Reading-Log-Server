@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const Text = require('../api/models/text');
 const Word = require('../api/models/word');
-const rank = require('../api/helpers/ranking');
+const { rank } = require('../api/helpers/ranking');
 const getWords = require('./fileReader');
 
 let uri = `mongodb+srv://LarryDev:${process.env.MONGO_ATLAS_LARRYDEV_PASSWORD}@cluster0.esyq9.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`
@@ -20,7 +20,7 @@ const snippets = [{
         source: "A Tale of Two Cities"
     },
     {
-        text: 'It is a truth universally acknowledged, that a single man in possession of a good fortune must be in want of a wife. However little known the feelings or views of such a man may be on his first entering a neighbourhood, this truth is so well fixed in the minds of the surrounding families, that he is considered as the rightful property of some one or other of their daughters.complexity seed',
+        text: 'It is a truth universally acknowledged, that a single man in possession of a good fortune must be in want of a wife. However little known the feelings or views of such a man may be on his first entering a neighbourhood, this truth is so well fixed in the minds of the surrounding families, that he is considered as the rightful property of some one or other of their daughters.',
         author: "Jane Austen",
         source: "Pride and Prejudice"
     },

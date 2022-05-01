@@ -25,7 +25,6 @@ const seedDB = async() => {
     await Word.deleteMany({});
     await Word.insertMany(words);
     console.log(`You have seeded ${words.length} text snippets`);
-
 }
 
 seedDB().then(() => {
