@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
-const Text = require('../api/models/textModel');
-const Word = require('../api/models/wordModel');
+const Text = require('../api/models/text');
+const Word = require('../api/models/word');
 const rank = require('../api/helpers/ranking');
 const getWords = require('./fileReader');
 
@@ -12,8 +12,19 @@ const options = {
     useUnifiedTopology: true
 };
 
+
+
+const textSnippets = [
+    'hello world',
+    'second seed'
+];
+
 mongoose.connect(uri, options).then(() => {
         console.log("Database connection established!");
+
+        seedDB().then(() => {
+            mongoose.connection.close();
+        });
     },
     err => {
         {
@@ -21,36 +32,15 @@ mongoose.connect(uri, options).then(() => {
         }
     });
 
-const seedText = [{
-        text: 'hello world'
-    },
-    {
-        text: 'second seed'
-    }
-];
 
-
-////////////////////////
-//CSV parsing for data//
-////////////////////////
-
-// perform the calculation of seeing how complex the values are. 
-// TODO: access the csv file measuring word frequency
-
+//TODO: figure out why this seed seems to run before the actual mongoose connection. 
 const seedDB = async() => {
-    const words = await getWords();
+    //TODO: figure out how to get this line performing first. 
+    const textWithComplexity = await rank(textSnippets)
+    console.log('textOBj with complexity:', textWithComplexity);
 
     await Text.deleteMany({});
-    await Text.insertMany(seedText);
-    console.log(`You have seeded ${seedText.length} text snippets`);
-    //TODO: make a helper function that performs the calculation of text complexity
+    await Text.insertMany(textWithComplexity);
 
-    await Word.deleteMany({});
-    // await Word.insertMany(words);
-    await Word.insertMany({ word: 'hello' });
-    console.log(`You have seeded ${words.length} text snippets`);
+    console.log(`You have seeded ${textWithComplexity.length} text snippets`);
 }
-
-seedDB().then(() => {
-    mongoose.connection.close();
-});

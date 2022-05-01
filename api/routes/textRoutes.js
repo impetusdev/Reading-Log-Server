@@ -18,7 +18,4 @@ module.exports = function(app) {
     app.route("/word/:word")
         .get(wordList.listWord);
 
-
-
-
 }
