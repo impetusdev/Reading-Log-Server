@@ -1,13 +1,11 @@
-const text = require("body-parser/lib/types/text");
 const Word = require("../models/word");
 
-// Inputing the word get it's ranking difficuly
+// Inputting the textsnippet to get  its ranking difficuly
 const rank = async(snippets) => {
     return result = await Promise.all(
         snippets.map(async snippet => {
             const words = removeNonLetterChars(snippet.text).split(' ');
             const wordCount = words.length;
-
 
             const complexityObjs = await Word.find({
                 word: {
@@ -15,7 +13,6 @@ const rank = async(snippets) => {
                 }
             });
 
-            // sums the complexity value from each word
             const complexity = calcComplexity(complexityObjs, wordCount);
             return {...snippet, complexity, wordCount }; // adds the complexity field to the snippet
         }))
