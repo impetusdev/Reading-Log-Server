@@ -4,13 +4,21 @@ const Word = require("../models/word");
 const rank = async(textSnippets) => {
     const result = await Promise.all(
         textSnippets.map(async text => {
-            let textArr = text.split(' ');
+            let words = text.split(' ')
 
-            console.log('search word:', textArr[0]);
-            const { rank } = await Word.findOne({ word: textArr[0] });
+            console.log(words);
+            const complexityObjs = await Word.find({
+                word: {
+                    $in: words
+                }
+            });
 
-            console.log('complexity before returning:', rank);
-            return { text, complexity: rank };
+            console.log(complexityObjs);
+            // TODO: with this array reduce down to a single value. 
+
+            const complexity = complexityObjs.reduce((prev, curr) => prev + curr.rank, 0);
+            console.log(complexity);
+            return { text, complexity };
         })
     )
 
