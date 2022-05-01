@@ -5,7 +5,9 @@ const Word = require("../models/word");
 const rank = async(snippets) => {
     return result = await Promise.all(
         snippets.map(async snippet => {
-            const words = convertToPlainWords(snippet.text)
+            const words = removeNonLetterChars(snippet.text).split(' ');
+            const wordCount = words.length;
+
 
             const complexityObjs = await Word.find({
                 word: {
@@ -14,16 +16,20 @@ const rank = async(snippets) => {
             });
 
             // sums the complexity value from each word
-            const complexity = complexityObjs.reduce((prev, curr) => prev + curr.rank, 0);
-            return {...snippet, complexity }; // adds the complexity field to the snippet
-        })
-    )
+            const complexity = calcComplexity(complexityObjs, wordCount);
+            return {...snippet, complexity, wordCount }; // adds the complexity field to the snippet
+        }))
 }
 
-//TODO: consider fixing the cases where a single apostrophe mark would for possessive etc would break. 
-const convertToPlainWords = (textSnippet) => {
-    // converts to lowercase & removes all non letter characters & returns as array of words
-    return textSnippet.toLowerCase().replace(/[^a-z ]/g, '').split(' ');
+// converts to lowercase & removes all non letter characters
+const removeNonLetterChars = (textSnippet) => {
+    //TODO: consider fixing the cases where a single apostrophe mark would for possessive etc would break("that's" should be converted to "that"). 
+    return textSnippet.toLowerCase().replace(/[^a-z ]/g, '');
 }
 
-module.exports = { rank, convertToPlainWords };
+// sums the rank field of all complexityObjs then divides by the wordCount
+const calcComplexity = (complexityObjs, wordCount) => {
+    return complexityObjs.reduce((prev, curr) => prev + curr.rank, 0) / wordCount;
+}
+
+module.exports = { rank, removeNonLetterChars, calcComplexity };
