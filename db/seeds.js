@@ -15,8 +15,8 @@ const options = {
 
 
 const textSnippets = [
-    'hello world',
-    'second seed'
+    'arity world',
+    'complexity seed'
 ];
 
 mongoose.connect(uri, options).then(() => {
