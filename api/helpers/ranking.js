@@ -1,10 +1,10 @@
 const Word = require("../models/word");
 
 // Inputing the word get it's ranking difficuly
-const rank = async(textSnippets) => {
+const rank = async(snippets) => {
     const result = await Promise.all(
-        textSnippets.map(async text => {
-            const words = text.split(' ')
+        snippets.map(async snippet => {
+            const words = snippet.text.split(' ')
 
             const complexityObjs = await Word.find({
                 word: {
@@ -13,7 +13,7 @@ const rank = async(textSnippets) => {
             });
 
             const complexity = complexityObjs.reduce((prev, curr) => prev + curr.rank, 0);
-            return { text, complexity };
+            return {...snippet, complexity };
         })
     )
 

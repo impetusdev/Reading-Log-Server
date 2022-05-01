@@ -11,12 +11,19 @@ const TextSchema = new Schema({
         type: String,
         required: true
     },
+    author: {
+        type: String,
+        required: true
+    },
+    source: {
+        type: String,
+    },
     wordCount: {
         type: Number,
-
     },
     complexity: {
         type: Number,
+        required: true
     },
     createdOn: {
         type: Date,
