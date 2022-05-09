@@ -1,6 +1,6 @@
 const Text = require("../models/text");
 
-exports.listAllText = (_, res) => {
+listAllText = (_, res) => {
     Text.find({}, (err, text) => {
         if (err) {
             res.status(500).send(err);
@@ -9,7 +9,7 @@ exports.listAllText = (_, res) => {
     });
 };
 
-exports.createNewText = (req, res) => {
+createNewText = (req, res) => {
     // TODO: get the data and then get the word rank. 
     let newText = new Text(req.body);
     newText.save((err, text) => {
@@ -20,7 +20,7 @@ exports.createNewText = (req, res) => {
     });
 };
 
-exports.updateText = (req, res) => {
+updateText = (req, res) => {
     Text.findOneAndUpdate({ _id: req.params.id }, req.body, { new: true }, (err, text) => {
         if (err) {
             res.status(500).send(err);
@@ -30,7 +30,7 @@ exports.updateText = (req, res) => {
 };
 
 
-exports.deleteText = (req, res) => {
+deleteText = (req, res) => {
     Text.deleteOne({ _id: req.params.id }, (err) => {
         if (err) {
             res.status(500).send(err)
@@ -38,3 +38,10 @@ exports.deleteText = (req, res) => {
         res.status(200).json({ message: "Text was successfully deleted" });
     })
 };
+
+module.exports = {
+    listAllText,
+    createNewText,
+    updateText,
+    deleteText
+}

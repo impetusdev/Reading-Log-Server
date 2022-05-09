@@ -4,7 +4,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 
-const routes = require('./api/routes/textRoutes');
+const routes = require('./api/routes/routes');
 require("./config/db");
 
 // Import API route
