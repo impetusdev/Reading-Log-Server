@@ -1,12 +1,10 @@
 'use strict';
-
-
 // TODO: separate these routes using router
 
 module.exports = function(app) {
     const textList = require('../controllers/textController');
     const wordList = require('../controllers/wordController');
-    const { register } = require('../controllers/userController.js');
+    const user = require('../controllers/userController.js');
 
     app.route("/text")
         .get(textList.listAllText)
@@ -16,12 +14,22 @@ module.exports = function(app) {
         .put(textList.updateText)
         .delete(textList.deleteText);
 
+
+    // WORDS
     app.route("/word")
         .get(wordList.listAllWords);
 
     app.route("/word/:word")
         .get(wordList.listWord);
 
+
+    //USERS
+    app.route("/login")
+        .post(user.loginUser);
+
     app.route("/register")
-        .post(register)
+        .post(user.registerUser);
+
+    app.route("/me")
+        .get(user.getMe);
 }
