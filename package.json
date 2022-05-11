@@ -5,6 +5,7 @@
         "chai": "^4.3.6",
         "cors": "^2.8.5",
         "csv-parser": "^3.0.0",
+        "dotenv": "^16.0.1",
         "express": "^4.17.3",
         "express-async-handler": "^1.2.0",
         "jsonwebtoken": "^8.5.1",
