@@ -4,11 +4,11 @@ const asyncHandler = require('express-async-handler')
 const User = require('../models/user');
 require('dotenv').config()
 
-// @desc Register
-// @route POST /register
-// @access Public
 // TODO: extract all of the validation logic into helper files.
 
+// @desc Login
+// @route POST /login
+// @access Public
 const loginUser = asyncHandler(async(req, res) => {
     // get the req
     const { email, password } = req.body;
@@ -30,6 +30,9 @@ const loginUser = asyncHandler(async(req, res) => {
     }
 })
 
+// @desc Register
+// @route POST /register
+// @access Public
 const registerUser = asyncHandler(async(req, res) => {
     const { username, email, password } = req.body;
     // checks if all data fields have come through
@@ -67,6 +70,9 @@ const registerUser = asyncHandler(async(req, res) => {
     }
 })
 
+// @desc Register
+// @route GET /me
+// @access Private
 const getMe = asyncHandler(async(req, res) => {
     res.json({ message: 'Get Current User' });
 })

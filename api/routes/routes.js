@@ -1,5 +1,9 @@
 'use strict';
 // TODO: separate these routes using router
+//TODO: make these protected routes
+
+const { protect } = require('../middleware/authMiddleware');
+
 
 module.exports = function(app) {
     const textList = require('../controllers/textController');
