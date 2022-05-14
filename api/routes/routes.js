@@ -35,5 +35,5 @@ module.exports = function(app) {
         .post(user.registerUser);
 
     app.route("/me")
-        .get(user.getMe);
+        .get(protect, user.getMe); // putting in a second function here allows for middleware, specifically the authenticationMiddleware
 }
