@@ -18,14 +18,12 @@ module.exports = function(app) {
         .put(textList.updateText)
         .delete(textList.deleteText);
 
-
     // WORDS
     app.route("/word")
         .get(wordList.listAllWords);
 
     app.route("/word/:word")
         .get(wordList.listWord);
-
 
     //USERS
     app.route("/login")
