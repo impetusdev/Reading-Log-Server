@@ -23,7 +23,7 @@ const TextSchema = new Schema({
     },
     complexity: {
         type: Number,
-        required: true
+        // required: true
     },
     createdOn: {
         type: Date,

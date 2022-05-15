@@ -8,7 +8,6 @@ const routes = require('./api/routes/routes');
 require("./config/db");
 
 // Import API route
-
 const port = process.env.PORT || 3000;
 const app = express();
 

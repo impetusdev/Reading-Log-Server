@@ -1,4 +1,5 @@
 const Text = require("../models/text");
+const { rank } = require('../helpers/ranking');
 
 listAllText = (_, res) => {
     Text.find({}, (err, text) => {
@@ -9,15 +10,15 @@ listAllText = (_, res) => {
     });
 };
 
-createNewText = (req, res) => {
-    // TODO: get the data and then get the word rank. 
-    let newText = new Text(req.body);
-    newText.save((err, text) => {
+createNewText = async(req, res) => {
+    let ranked = await rank([req.body]);
+
+    Text.insertMany(ranked, (err, text) => {
         if (err) {
             res.status(500).send(err);
         }
         res.status(201).json(text);
-    });
+    })
 };
 
 updateText = (req, res) => {
