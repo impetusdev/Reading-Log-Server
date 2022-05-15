@@ -15,7 +15,6 @@ const loginUser = asyncHandler(async(req, res) => {
 
     const user = await User.findOne({ email });
 
-    console.log(`User password is: ${user.password}`);
     if (user && (await bcrypt.compare(password, user.password))) {
 
         res.json({
@@ -84,7 +83,6 @@ const getMe = asyncHandler(async(req, res) => {
 
 // generate JWT
 const generateToken = (id) => {
-    console.log('hello')
     return jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: '30d' });
 }
 
