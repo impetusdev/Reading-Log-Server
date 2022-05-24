@@ -9,6 +9,7 @@ module.exports = function(app) {
     const textList = require('../controllers/textController');
     const wordList = require('../controllers/wordController');
     const user = require('../controllers/userController.js');
+    const reading = require('../controllers/readingController');
 
     app.route("/text")
         .get(textList.listAllText)
@@ -34,4 +35,10 @@ module.exports = function(app) {
 
     app.route("/me")
         .get(protect, user.getMe); // putting in a second function here allows for middleware, specifically the authenticationMiddleware
+
+
+    // READINGS
+    app.route("/reading")
+        .get(reading.listAllReadings)
+        .post(reading.createReading);
 }
